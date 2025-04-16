@@ -1,0 +1,255 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iStore — Магазин iPhone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ccc;
+      overflow: hidden;
+      color: black;
+    }
+    .page {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #d3d3d3;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      text-align: center;
+      animation: fadeSlide 1.5s ease;
+    }
+    .page.active {
+      display: flex;
+    }
+    .page:first-child {
+      animation: zoomEffect 10s ease-in-out infinite alternate;
+    }
+    .nav {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 80px;
+    }
+    .nav button {
+      background: rgba(255,255,255,0.9);
+      color: black;
+      border: 1px solid #333;
+      padding: 10px 25px;
+      cursor: pointer;
+      border-radius: 50px;
+      transition: background 0.3s ease;
+    }
+    .nav button:hover {
+      background: rgba(220,220,220,1);
+    }
+    h1 {
+      font-size: 4vw;
+      text-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+    p {
+      font-size: 1.5vw;
+      max-width: 800px;
+      margin-top: 20px;
+    }
+    .models, .tech-list {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .model, .tech-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 20px;
+      max-width: 250px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      color: black;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: slideIn 1s ease both;
+    }
+    .model img, .tech-item img {
+      width: 100%;
+      border-radius: 20px;
+    }
+    .model h3, .tech-item h3 {
+      margin: 10px 0 5px;
+      font-size: 1.2em;
+    }
+    .model p, .tech-item p {
+      font-size: 0.9em;
+    }
+    .buy-options button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #007aff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .installment {
+      margin-top: 10px;
+      font-size: 0.8em;
+      color: #555;
+      display: none;
+    }
+    .installment.show {
+      display: block;
+    }
+    @keyframes zoomEffect {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .welcome-message {
+      font-size: 1.4vw;
+      margin-top: 50px;
+      animation: fadeInScale 2s ease forwards;
+      opacity: 0;
+      transform: scale(0.8);
+      color: #000;
+      background: rgba(255,255,255,0.7);
+      padding: 15px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+    @keyframes fadeInScale {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <button onclick="showPage(0)">Главная</button>
+    <button onclick="showPage(1)">Модели</button>
+    <button onclick="showPage(2)">Технологии</button>
+    <button onclick="showPage(3)">Свяжитесь</button>
+  </div>
+
+  <div class="page active" style="background-image: url('44562ba5-5e37-4fee-994f-e016a4a97799.jfif');">
+    <h1>iStore</h1>
+    <p>Ваш путь к оригинальному iPhone начинается здесь</p>
+    <div class="welcome-message">Добро пожаловать в наш фирменный магазин Apple!</div>
+  </div>
+
+  <div class="page">
+    <h1>Модели iPhone</h1>
+    <div class="models" id="models-container"></div>
+  </div>
+
+  <div class="page">
+    <h1>Технологии Apple</h1>
+    <div class="tech-list">
+      <div class="tech-item">
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQKW3_VW_34FR+watch-case-45-alum-gold-nc-9s_VW_34FR_WF_CO_GEO_US?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1692732077347">
+        <h3>Apple Watch</h3>
+        <p>Новые возможности здоровья и фитнеса</p>
+        <div class="buy-options">
+          <button onclick="toggleInstallment(this)">Рассрочка</button>
+          <div class="installment">6 месяцев: 66$/мес<br>12 месяцев: 33$/мес</div>
+        </div>
+      </div>
+      <div class="tech-item">
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MME73?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1632861338000">
+        <h3>AirPods Pro</h3>
+        <p>Превосходное шумоподавление и звук</p>
+        <div class="buy-options">
+          <button onclick="toggleInstallment(this)">Рассрочка</button>
+          <div class="installment">6 месяцев: 42$/мес<br>12 месяцев: 21$/мес</div>
+        </div>
+      </div>
+      <div class="tech-item">
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-pro-11-select-2022?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1664388287374">
+        <h3>iPad Pro</h3>
+        <p>Чип M2, Liquid Retina дисплей, поддержка Apple Pencil</p>
+        <div class="buy-options">
+          <button onclick="toggleInstallment(this)">Рассрочка</button>
+          <div class="installment">6 месяцев: 150$/мес<br>12 месяцев: 75$/мес</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <h1>Свяжитесь с нами</h1>
+    <p>📞 +998940510385<br>📧 hello@istore.ru<br>Москва, ул. Технологий, д. 15</p>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    function showPage(index) {
+      pages.forEach((page, i) => {
+        page.classList.toggle('active', i === index);
+      });
+    }
+
+    function toggleInstallment(button) {
+      const installment = button.nextElementSibling;
+      installment.classList.toggle('show');
+    }
+
+    const models = [
+      {name: "iPhone SE", price: 499},
+      {name: "iPhone SE Max", price: 599},
+      {name: "iPhone 14", price: 799},
+      {name: "iPhone 14 Pro", price: 1099},
+      {name: "iPhone 14 Pro Max", price: 1199},
+      {name: "iPhone 15", price: 999},
+      {name: "iPhone 15 Pro", price: 1299},
+      {name: "iPhone 15 Pro Max", price: 1399},
+      {name: "iPhone 16", price: 1099},
+      {name: "iPhone 16 Pro", price: 1399},
+      {name: "iPhone 16 Pro Max", price: 1499}
+    ];
+
+    const modelsContainer = document.getElementById('models-container');
+    models.forEach(model => {
+      const div = document.createElement('div');
+      div.className = 'model';
+      div.innerHTML = `
+        <img src="https://via.placeholder.com/250x250?text=${encodeURIComponent(model.name)}">
+        <h3>${model.name}</h3>
+        <p>Цена: ${model.price}$</p>
+        <div class="buy-options">
+          <button onclick="toggleInstallment(this)">Рассрочка</button>
+          <div class="installment">
+            6 месяцев: ${Math.round(model.price / 6)}$/мес<br>
+            12 месяцев: ${Math.round(model.price / 12)}$/мес
+          </div>
+        </div>
+      `;
+      modelsContainer.appendChild(div);
+    });
+  </script>
+</body>
